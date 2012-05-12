@@ -1,4 +1,4 @@
 dev-boxes
 =========
 
-Awesomes boxes for development
+Awesomes development boxes
