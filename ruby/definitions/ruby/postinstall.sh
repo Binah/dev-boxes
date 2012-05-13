@@ -16,9 +16,10 @@ apt-get -y update
 apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential
 apt-get -y install zlib1g-dev libssl-dev libreadline-gplv2-dev
-apt-get -y install curl libreadline5-dev libxml2-dev libxslt-dev sqlite3 libsqlite3.dev
-apt-get -y tmux
-apt-get -y git-core
+apt-get -y install curl libxml2-dev libxslt-dev sqlite3 libsqlite3.dev
+apt-get -y install tmux
+apt-get -y install vim
+apt-get -y install git-core
 
 # Automatic password
 # http://stackoverflow.com/questions/9743828/installing-percona-mysql-unattended-on-ubuntu
@@ -58,6 +59,12 @@ rm -rf rubygems-1.8.11
 
 # Installing rbenv
 curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+if [ -d $HOME/.rbenv ]; then
+	touch .bash_profile
+	echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/vagrant/.bash_profile
+    echo 'eval "$(rbenv init -)"' >> /home/vagrant/.bash_profile
+fi
+source ~/.bash_profile
 
 # Installing bundler
 /opt/ruby/bin/gem install bundler
@@ -75,7 +82,7 @@ curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-instal
 
 # Installin tmux config
 cd /home/vagrant/
-wget -c ~/https://raw.github.com/Binah/dev-environment/master/tmux/.tmux.conf
+wget -c https://raw.github.com/Binah/dev-environment/master/tmux/.tmux.conf
 
 # Installing vim config
 cd /tmp
