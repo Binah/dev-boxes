@@ -57,28 +57,36 @@ cd rubygems-1.8.11
 cd ..
 rm -rf rubygems-1.8.11
 
-# Installing rbenv
-curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
-if [ -d $HOME/.rbenv ]; then
-	touch .bash_profile
-	echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/vagrant/.bash_profile
-    echo 'eval "$(rbenv init -)"' >> /home/vagrant/.bash_profile
-fi
-source ~/.bash_profile
-
-# Installing bundler
-/opt/ruby/bin/gem install bundler
-
-# Installing cucumber & rspec
-/opt/ruby/bin/gem install cucumber
-/opt/ruby/bin/gem install rspec
-
-# Installing rails
-/opt/ruby/bin/gem install rails
-
 # Installing chef & Puppet
 /opt/ruby/bin/gem install chef --no-ri --no-rdoc
 /opt/ruby/bin/gem install puppet --no-ri --no-rdoc
+
+# Changes to user
+su vagrant
+cd $HOME
+
+# Installing rbenv
+curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+echo 'if [ -d $HOME/.rbenv ]; then' >> $HOME/.bashrc
+	echo '    export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bashrc
+    echo '    eval "$(rbenv init -)"' >> $HOME/.bashrc
+	#echo '    chown -R vagrant /home/vagrant/.rbenv'
+echo 'fi'
+. $HOME/.bashrc
+
+#Installing ruby on rbenv
+$HOME/.rbenv/bin/rbenv install 1.9.2-p290
+$HOME/.rbenv/bin/rbenv global 1.9.2-p290
+
+# Installing bundler
+$HOME/.rbenv/shims/gem install bundler
+
+# Installing cucumber & rspec
+$HOME/.rbenv/shims/gem install cucumber
+$HOME/.rbenv/shims/gem install rspec
+
+# Installing rails
+/opt/ruby/bin/gem install rails
 
 # Installin tmux config
 cd /home/vagrant/
