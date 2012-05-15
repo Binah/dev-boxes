@@ -1,3 +1,4 @@
+#!/bin/env bash
 # postinstall.sh created from Mitchell's official lucid32/64 baseboxes
 
 date > /etc/vagrant_box_build_time
@@ -67,16 +68,17 @@ cd $HOME
 
 # Installing rbenv
 curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
-echo 'if [ -d $HOME/.rbenv ]; then' >> $HOME/.bashrc
-	echo '    export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bashrc
-    echo '    eval "$(rbenv init -)"' >> $HOME/.bashrc
-	#echo '    chown -R vagrant /home/vagrant/.rbenv'
+echo 'if [ -d $HOME/.rbenv ]; then' >> $HOME/.bash_profile
+echo '    export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bash_profile
+echo '    eval "$(rbenv init -)"' >> $HOME/.bash_profile
+echo '    chown -R vagrant $HOME/.rbenv'
 echo 'fi'
-. $HOME/.bashrc
 
 #Installing ruby on rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
 $HOME/.rbenv/bin/rbenv install 1.9.2-p290
 $HOME/.rbenv/bin/rbenv global 1.9.2-p290
+$HOME/.rbenv/bin/rbenv rehash
 
 # Installing bundler
 $HOME/.rbenv/shims/gem install bundler
@@ -86,7 +88,7 @@ $HOME/.rbenv/shims/gem install cucumber
 $HOME/.rbenv/shims/gem install rspec
 
 # Installing rails
-/opt/ruby/bin/gem install rails
+$HOME/.rbenv/shims/gem install rails
 
 # Installin tmux config
 cd /home/vagrant/
