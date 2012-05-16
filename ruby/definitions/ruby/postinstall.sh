@@ -71,8 +71,13 @@ curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-instal
 echo 'if [ -d $HOME/.rbenv ]; then' >> $HOME/.bash_profile
 echo '    export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bash_profile
 echo '    eval "$(rbenv init -)"' >> $HOME/.bash_profile
-echo '    chown -R vagrant $HOME/.rbenv'
-echo 'fi'
+echo '    chown -R vagrant $HOME/.rbenv' >> $HOME/.bash_profile
+echo 'fi' >> $HOME/.bash_profile
+echo '' >> $HOME/.bash_profile
+echo 'if [ -f ~/.bashrc ]; then' >> $HOME/.bash_profile
+echo '    source ~/.bashrc' >> $HOME/.bash_profile
+echo 'fi' >> $HOME/.bash_profile
+
 
 #Installing ruby on rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
