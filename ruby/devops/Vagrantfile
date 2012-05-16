@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ruby"
+  config.vm.box = "25mm"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -25,21 +25,21 @@ Vagrant::Config.run do |config|
   # Assign this VM to a bridged network, allowing you to connect directly to a
   # network using the host's network device. This makes the VM appear as another
   # physical device on your network.
-  # config.vm.network :bridged
+   config.vm.network :bridged
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  # config.vm.forward_port 80, 8080
+  config.vm.forward_port 3000, 8080
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
-  # config.vm.share_folder "v-data", "/vagrant_data", "../data"
-
+  config.vm.share_folder "v-data", "/home/vagrant/code", "./code"
+  config.vm.share_folder "v-conf", "/home/vagrant/conf", "./conf"
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
-  # the file ruby.pp in the manifests_path directory.
+  # the file 25mm.pp in the manifests_path directory.
   #
   # An example Puppet manifest to provision the message of the day:
   #
@@ -56,7 +56,7 @@ Vagrant::Config.run do |config|
   #
   # config.vm.provision :puppet do |puppet|
   #   puppet.manifests_path = "manifests"
-  #   puppet.manifest_file  = "ruby.pp"
+  #   puppet.manifest_file  = "25mm.pp"
   # end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
