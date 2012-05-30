@@ -21,6 +21,7 @@ apt-get -y install curl libxml2-dev libxslt-dev sqlite3 libsqlite3.dev
 apt-get -y install tmux
 apt-get -y install vim
 apt-get -y install git-core
+apt-get -y install redis-server
 
 # Automatic password
 # http://stackoverflow.com/questions/9743828/installing-percona-mysql-unattended-on-ubuntu
@@ -95,6 +96,9 @@ $HOME/.rbenv/shims/gem install rspec
 # Installing rails
 $HOME/.rbenv/shims/gem install rails
 
+# Installing resque
+$HOME/.rbenv/shims/gem install resque
+
 # Installin tmux config
 cd /home/vagrant/
 wget -c https://raw.github.com/Binah/dev-environment/master/tmux/.tmux.conf
@@ -129,7 +133,7 @@ umount /mnt
 rm VBoxGuestAdditions_$VBOX_VERSION.iso
 
 # Remove items used for building, since they aren't needed anymore
-apt-get -y remove linux-headers-$(uname -r) build-essential
+apt-get -y remove linux-headers-$(uname -r)
 apt-get -y autoremove
 
 # Zero out the free space to save space in the final image:
